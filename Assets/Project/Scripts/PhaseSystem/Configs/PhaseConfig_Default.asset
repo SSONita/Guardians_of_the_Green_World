@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871c0f2803731034784917880efbd007, type: 3}
+  m_Name: PhaseConfig_Default
+  m_EditorClassIdentifier: 
+  safeDuration: 10
+  dangerDuration: 10
+  disasterDuration: 10
+  musicSafe: {fileID: 8300000, guid: 45d281aa2017d0d45a8e934ebd498c8c, type: 3}
+  musicDanger: {fileID: 8300000, guid: 23db2e5b9145a2b41be887c9f4b6cded, type: 3}
+  musicDisaster: {fileID: 8300000, guid: 956613cbf272d8c46957bb1e9488f0c3, type: 3}
+  sfxImpactTransition: {fileID: 8300000, guid: 5db2180c08ae93042aed6597a3854b41, type: 3}
+  sfxAirTransition: {fileID: 8300000, guid: 1e648a5ae123cc046b3a3a86f3afade3, type: 3}
+  uiSafe: {r: 0.1, g: 0.8, b: 0.2, a: 1}
+  uiDanger: {r: 1, g: 0.6, b: 0.1, a: 1}
+  uiDisaster: {r: 1, g: 0.2, b: 0.2, a: 1}
