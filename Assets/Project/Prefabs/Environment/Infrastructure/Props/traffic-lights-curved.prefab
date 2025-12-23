@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2868816751751548670}
   - component: {fileID: 14886198804199988}
   - component: {fileID: 1194130132}
-  - component: {fileID: -5608030705817736812}
+  - component: {fileID: 8033047492203371401}
   m_Layer: 0
   m_Name: traffic-lights-curved
   m_TagString: Untagged
@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeLight: 0
---- !u!65 &-5608030705817736812
-BoxCollider:
+--- !u!64 &8033047492203371401
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,6 +119,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.8767338, y: 4.7470093, z: 0.8409033}
-  m_Center: {x: -1.1223245, y: 2.3735046, z: 0.03592272}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4966552071455726072, guid: c51ea17da238941488aa7d9c1c14417c, type: 3}

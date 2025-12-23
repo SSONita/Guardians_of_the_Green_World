@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 647621503597504737}
   - component: {fileID: 4563003795723413316}
   - component: {fileID: 1781169869476762510}
-  - component: {fileID: 621180263721730613}
+  - component: {fileID: -8804762939336973219}
   m_Layer: 0
   m_Name: road-sign-double(two-lane-road)
   m_TagString: Untagged
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &621180263721730613
-BoxCollider:
+--- !u!64 &-8804762939336973219
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,6 +105,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.579702, y: 6.4959316, z: 0.9813237}
-  m_Center: {x: 0, y: 3.2479663, z: -0.047966138}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1654033243483859245, guid: 505062bdf3e564a748607d29fea0d3a7, type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5071574528400669647}
   - component: {fileID: 8200493880856196202}
   - component: {fileID: 6209046570107814048}
-  - component: {fileID: -2612120453287202820}
+  - component: {fileID: -3989276248193542512}
   m_Layer: 0
   m_Name: subway-entrance
   m_TagString: Untagged
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-2612120453287202820
-BoxCollider:
+--- !u!64 &-3989276248193542512
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,6 +105,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7.7600403, y: 17.131807, z: 18.277605}
-  m_Center: {x: 0.03855133, y: -2.6856444, z: 9.0061865}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6111523903003704574, guid: b2d067c682aa44dca9b4374b7475a536, type: 3}
