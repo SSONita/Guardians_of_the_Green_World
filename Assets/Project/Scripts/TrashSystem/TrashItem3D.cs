@@ -52,7 +52,8 @@ public class TrashItem3D : MonoBehaviour
             Vector3 target = ray.GetPoint(enter) + _offset;
             // Maintain a fixed depth if you use front-view camera
             // Keep item on a fixed depth plane (for front-view orthographic camera)
-            target.z = /* your 2D plane z, e.g. */ 0f;  // or the item’s starting z
+            //target.z = /* your 2D plane z, e.g. */ 0f;  // or the item’s starting z
+            target.z = transform.position.z;
             transform.position = Vector3.Lerp(transform.position, target, dragSmooth * Time.deltaTime);
 
         }

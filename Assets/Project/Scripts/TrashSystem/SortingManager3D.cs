@@ -87,8 +87,8 @@ public class SortingManager3D : MonoBehaviour
             item.transform.position = bin.transform.position + Vector3.up * 0.1f;
         }
 
-    //Optional: destroy after short delay
-         Destroy(item.gameObject, 0.25f);
+        //Optional: destroy after short delay
+        //Destroy(item.gameObject, 0.25f);
 
         //UpdateUI();
 
@@ -98,6 +98,40 @@ public class SortingManager3D : MonoBehaviour
             // Hook your EndingManager or PhaseController here
         }
     }
+
+    //private void HandleCorrect(TrashItem3D item, Bin3D bin)
+    //{
+    //    correctlySorted++;
+    //    PlaySfx(sfxCorrect);
+
+    //    // Lock item; move to collected container or keep inside bin
+    //    item.isDraggable = false;
+    //    var col = item.GetComponent<Collider>();
+    //    if (col) col.enabled = false;
+
+    //    if (collectedContainer)
+    //    {
+    //        item.transform.SetParent(collectedContainer);
+    //        item.transform.localPosition = Vector3.zero + Random.insideUnitSphere * 0.2f;
+    //    }
+    //    else
+    //    {
+    //        // Snap into bin visibly
+    //        item.transform.SetParent(bin.transform);
+    //        item.transform.localPosition = Vector3.up * 0.1f;
+    //        item.transform.localRotation = Quaternion.identity;
+    //        item.transform.localScale = Vector3.one;
+    //    }
+
+    //    // For testing: do NOT destroy
+    //    // Destroy(item.gameObject, 0.25f);
+
+    //    if (correctlySorted >= totalItems)
+    //    {
+    //        Debug.Log("[Sorting] All items sorted! Trigger success.");
+    //    }
+    //}
+
 
     private void HandleWrong(TrashItem3D item, string reason)
     {
