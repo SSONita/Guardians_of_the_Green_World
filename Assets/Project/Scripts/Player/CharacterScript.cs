@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
         // Update Animator
         bool isWalking = (x != 0 || z != 0);
         animator.SetBool("isWalking", isWalking);
-        Debug.Log("isWalking: " + isWalking);
 
         // Gravity
         if (controller.isGrounded && velocity.y < 0)
