@@ -90,7 +90,7 @@ public class SortingManager3D : MonoBehaviour
         //Optional: destroy after short delay
         Destroy(item.gameObject, 0.25f);
 
-        //UpdateUI();
+        UpdateUI();
 
         if (correctlySorted >= totalItems)
         {
@@ -119,7 +119,7 @@ public class SortingManager3D : MonoBehaviour
         }
         else { item.transform.position = item.originalPosition; }
 
-        //UpdateUI();
+        UpdateUI();
     }
 
     private void PlaySfx(AudioClip clip)
@@ -127,10 +127,10 @@ public class SortingManager3D : MonoBehaviour
         if (clip && sfxSource) sfxSource.PlayOneShot(clip);
     }
 
-    //private void UpdateUI()
-    //{
-    //    var ui = FindObjectOfType<SortingUI>();
-    //    if (ui) ui.Refresh(correctlySorted, incorrectlySorted, totalItems);
-    //}
+    private void UpdateUI()
+    {
+        var ui = FindObjectOfType<SortingUI>();
+        if (ui) ui.Refresh(correctlySorted, incorrectlySorted, totalItems);
+    }
 }
 
