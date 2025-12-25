@@ -16,6 +16,7 @@ public class SortingManager3D : MonoBehaviour
     public int totalItems;
     public int correctlySorted;
     public int incorrectlySorted;
+    public float accuracy;
 
     [Header("Audio (optional)")]
     public AudioSource sfxSource;
@@ -95,8 +96,19 @@ public class SortingManager3D : MonoBehaviour
         if (correctlySorted >= totalItems)
         {
             Debug.Log("[Sorting] All items sorted! Trigger success.");
-            // Hook your EndingManager or PhaseController here
+            accuracy = totalItems > 0 ? (float)correctlySorted / totalItems * 100f : 0f;
+
+            // Save results
+            PlayerPrefs.SetInt("CorrectlySorted", correctlySorted);
+            PlayerPrefs.SetInt("IncorrectlySorted", incorrectlySorted);
+            PlayerPrefs.SetInt("TotalItems", totalItems);
+            PlayerPrefs.SetInt("Win", 1); // success
+            PlayerPrefs.SetFloat("Accuracy", accuracy);
+
+            // Load ending scene
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Ending_Success");
         }
+
     }
 
 
@@ -129,6 +141,8 @@ public class SortingManager3D : MonoBehaviour
 
     private void UpdateUI()
     {
+        int attempts = correctlySorted + incorrectlySorted; 
+        accuracy = attempts > 0 ? (float)correctlySorted / attempts * 100f : 0f;
         var ui = FindObjectOfType<SortingUI>();
         if (ui) ui.Refresh(correctlySorted, incorrectlySorted, totalItems);
     }
