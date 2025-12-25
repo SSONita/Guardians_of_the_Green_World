@@ -309,6 +309,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accepts: 5
-  idleColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  idleColor: {r: 0.047169805, g: 0.046502307, b: 0.046502307, a: 1}
+  hoverColor: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 1}
   binRenderer: {fileID: 0}

@@ -19,11 +19,14 @@ public class TrashItem3D : MonoBehaviour
     private Vector3 _offset;
     private Rigidbody _rb;
 
+    [HideInInspector] public Vector3 originalPosition;
     void Awake()
     {
         _cam = Camera.main;
         _rb = GetComponent<Rigidbody>();
         _rb.isKinematic = true; // manual movement
+
+        originalPosition = transform.position;
     }
 
     void OnMouseDown()

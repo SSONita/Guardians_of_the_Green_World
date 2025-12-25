@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accepts: 3
-  idleColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverColor: {r: 0.049172312, g: 0.16037738, b: 0.049172312, a: 1}
+  idleColor: {r: 0.12941177, g: 0.3764706, b: 0.039215688, a: 1}
+  hoverColor: {r: 0.12941177, g: 0.3764706, b: 0.039215688, a: 1}
   binRenderer: {fileID: 0}
 --- !u!1 &6363982905806644083
 GameObject:
