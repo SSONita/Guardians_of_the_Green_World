@@ -13,13 +13,44 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private float verticalRotation = 0f;
     private Vector3 velocity;       // Track vertical velocity
+    private PlayerInventory inventory;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>(); 
+        inventory = GetComponent<PlayerInventory>();
         Cursor.lockState = CursorLockMode.Locked;
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Trash"))
+        {
+            PlayerInventory inventory = GetComponent<PlayerInventory>();
+            if (inventory != null)
+            {
+                inventory.AddTrash(other.gameObject);
+
+                // Safely destroy prefab root
+                if (other.transform.parent != null)
+                {
+                    Destroy(other.transform.parent.gameObject);
+                }
+                else
+                {
+                    Destroy(other.gameObject);
+                }
+
+                Debug.Log("Picked up trash via trigger: " + other.name);
+            }
+            else
+            {
+                Debug.LogError("PlayerInventory component missing on Player!");
+            }
+        }
+    }
+
 
     void Update()
     {
@@ -54,18 +85,22 @@ public class PlayerMovement : MonoBehaviour
         // Inside Update() of PlayerMovement
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+            Debug.Log("E pressed, casting ray...");
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 5f)) // 5 units interact range
+            int npcLayerMask = LayerMask.GetMask("NPC");
+            if (Physics.Raycast(ray, out hit, 20f, npcLayerMask)) // 5 units interact range
             {
+                Debug.Log("Raycast hit: " + hit.collider.name);
                 NPCMovement npc = hit.collider.GetComponent<NPCMovement>();
                 if (npc != null)
                 {
+                    Debug.Log("Interacting with NPC: " + npc.name);
                     npc.Interact(transform); // tell NPC to face player
                 }
             }
-        }
+        }else { Debug.Log("Raycast did not hit anything."); }
 
     }
 }

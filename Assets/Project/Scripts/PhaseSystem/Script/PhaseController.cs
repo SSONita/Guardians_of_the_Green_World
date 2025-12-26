@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -19,12 +18,30 @@ public class PhaseController : MonoBehaviour
 
     private Coroutine routine;
     private bool running;
+    private bool stopPhaseProgression = false; // 🚨 new flag
 
     private void OnEnable()
     {
-        // Auto-start for now (you'll move this to GameManager later)
         StartPhases();
+        GameEvents.OnPolluterStopped += HandlePolluterStopped;
+
+        // Subscribe HUD to phase events
+        if (GameHUD.Instance != null)
+        {
+            OnPhaseStarted += GameHUD.Instance.UpdatePhaseFromController;
+        }
     }
+
+    private void OnDisable()
+    {
+        GameEvents.OnPolluterStopped -= HandlePolluterStopped;
+
+        if (GameHUD.Instance != null)
+        {
+            OnPhaseStarted -= GameHUD.Instance.UpdatePhaseFromController;
+        }
+    }
+
 
     public void StartPhases()
     {
@@ -43,11 +60,22 @@ public class PhaseController : MonoBehaviour
     private IEnumerator RunPhases()
     {
         yield return RunPhase(PhaseType.Safe, config.safeDuration);
+
+        // 🚨 If polluter stopped, break out early
+        if (stopPhaseProgression) yield break;
+
         yield return RunPhase(PhaseType.Danger, config.dangerDuration);
+
+        if (stopPhaseProgression) yield break;
+
         yield return RunPhase(PhaseType.Disaster, config.disasterDuration);
 
+        if (!stopPhaseProgression)
+        {
+            OnAllPhasesCompleted?.Invoke();
+            Debug.Log("[PhaseController] ALL PHASES COMPLETED");
+        }
 
-        OnAllPhasesCompleted?.Invoke();
         running = false;
     }
 
@@ -56,9 +84,8 @@ public class PhaseController : MonoBehaviour
         CurrentPhase = phase;
         PhaseDuration = duration;
         PhaseElapsed = 0f;
-        // Inside RunPhase() at the start:
-        Debug.Log($"[PhaseController] STARTED phase: {phase}, duration: {duration}s");
 
+        Debug.Log($"[PhaseController] STARTED phase: {phase}, duration: {duration}s");
         OnPhaseStarted?.Invoke(phase);
 
         while (PhaseElapsed < duration)
@@ -78,15 +105,22 @@ public class PhaseController : MonoBehaviour
             {
                 Debug.Log($"[PhaseController] TICK {phase}: {remaining:F0}s remaining");
             }
-
         }
-        Debug.Log($"[PhaseController] ENDED phase: {phase}");
 
+        Debug.Log($"[PhaseController] ENDED phase: {phase}");
         OnPhaseEnded?.Invoke(phase);
 
+        // 🚨 If polluter stopped, don’t continue to next phase
+        if (stopPhaseProgression)
+        {
+            Debug.Log("[PhaseController] Phase progression stopped after confrontation.");
+            yield break;
+        }
+    }
 
-        // After all phases finish (in RunPhases()):
-        Debug.Log("[PhaseController] ALL PHASES COMPLETED");
-
+    private void HandlePolluterStopped()
+    {
+        stopPhaseProgression = true;
+        Debug.Log("[PhaseController] Polluter confronted! Phase progression halted, timer continues.");
     }
 }

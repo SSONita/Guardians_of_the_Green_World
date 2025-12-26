@@ -1,43 +1,58 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class NPCMovement : MonoBehaviour
 {
     [Header("Road following")]
-    public RoadNode currentNode;   // Assign starting node in Inspector
-    public float speed = 1f;       // NPC walking speed
+    public RoadNode currentNode;
+    public float speed = 1f;
 
     [Header("Gravity settings")]
-    public float gravity = -9.81f; // Same as Player
-    private Vector3 velocity;      // Track vertical velocity
+    public float gravity = -9.81f;
+    private Vector3 velocity;
 
     [Header("Interaction settings")]
-    public Transform player;          // Assign your Player in Inspector
-    public float interactRange = 5f;  // How close player must be
+    public Transform player;
+    public float interactRange = 5f;
     public KeyCode interactKey = KeyCode.E;
-    public float faceTurnSpeed = 5f;  // Rotation speed when facing player
-    public float resumeBuffer = 0.5f; // Extra distance to resume after leaving range
+    public float faceTurnSpeed = 5f;
+    public float resumeBuffer = 0.5f;
 
+    [Header("Polluter settings")]
+    public bool isPolluter = false;               // Manager sets this
+    [HideInInspector] public GameObject[] trashPrefabs; // Manager injects shared list
+    public Image exclamationMark;
+    public float trashInterval = 15f;
+
+    private bool hasBeenConfronted = false;
     private bool isInteracting = false;
-
     private RoadNode targetNode;
     private CharacterController controller;
-    private Animator animator;  
+    private Animator animator;
+    private ConversationManager conversationManager;
+    private Coroutine polluteRoutine;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        conversationManager = FindObjectOfType<ConversationManager>();
         ChooseNextNode();
+
+        if (isPolluter && trashPrefabs != null && trashPrefabs.Length > 0)
+        {
+            polluteRoutine = StartCoroutine(PolluteLoop());
+        }
     }
 
     void Update()
     {
-        // --- Gravity handling (ALWAYS run) ---
+        // Gravity
         if (controller.isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
-            // Small offset to avoid hover; tune as needed
             transform.position = new Vector3(
                 transform.position.x,
                 transform.position.y - 0.05f,
@@ -45,27 +60,20 @@ public class NPCMovement : MonoBehaviour
             );
         }
         velocity.y += gravity * Time.deltaTime;
-        
-        bool isWalking = (speed > 0);
-        animator.SetBool("isWalking", isWalking);
 
-        // --- Interaction check ---
-        if (player != null)
+        animator.SetBool("isWalking", !isInteracting && speed > 0);
+
+        // Interaction check (optional if you want NPC to self-check)
+        if (isPolluter && !hasBeenConfronted && player != null)
         {
             float distToPlayer = Vector3.Distance(transform.position, player.position);
-
             if (Input.GetKeyDown(interactKey) && distToPlayer <= interactRange)
             {
-                isInteracting = true;
-            }
-
-            if (isInteracting && distToPlayer > interactRange + resumeBuffer)
-            {
-                isInteracting = false;
+                StartCoroutine(ConversationSequence());
             }
         }
 
-        // --- Behavior when interacting ---
+        // If interacting, face player and pause walking
         if (isInteracting)
         {
             Vector3 lookDir = (player.position - transform.position);
@@ -76,13 +84,11 @@ public class NPCMovement : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, faceTurnSpeed * Time.deltaTime);
             }
 
-            // Apply gravity only while interacting
             controller.Move(velocity * Time.deltaTime);
-            return; // skip walking
+            return;
         }
 
-
-        // --- Normal node-following movement ---
+        // Normal road-node walking
         if (targetNode == null) return;
 
         Vector3 targetPos = targetNode.transform.position;
@@ -91,15 +97,11 @@ public class NPCMovement : MonoBehaviour
         dir = dir.normalized;
 
         Vector3 horizontalMove = dir * speed;
-
-        // Apply movement + gravity
         controller.Move((horizontalMove + velocity) * Time.deltaTime);
 
-        // Face the direction of travel
         if (dir.sqrMagnitude > 0.0001f)
             transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
 
-        // Arrival check
         float distXZ = Vector2.Distance(
             new Vector2(transform.position.x, transform.position.z),
             new Vector2(targetPos.x, targetPos.z)
@@ -124,9 +126,86 @@ public class NPCMovement : MonoBehaviour
         targetNode = currentNode.connectedNodes[index];
     }
 
+    // Trash throwing loop
+    private IEnumerator PolluteLoop()
+    {
+        while (isPolluter && !hasBeenConfronted)
+        {
+            yield return new WaitForSeconds(trashInterval);
+
+            Debug.Log("Polluter " + name + " spawning trash...");
+
+            if (trashPrefabs != null && trashPrefabs.Length > 0)
+            {
+                GameObject prefab = trashPrefabs[Random.Range(0, trashPrefabs.Length)];
+                Vector3 spawnPos = transform.position - transform.forward * 1.5f + Vector3.up * 0.2f;
+                //Instantiate(prefab, spawnPos, Quaternion.identity);
+                GameObject spawned = Instantiate(prefab, spawnPos, Quaternion.identity);
+
+                // Notify HUD
+                if (GameHUD.Instance != null)
+                {
+                    GameHUD.Instance.RegisterNewTrash();
+                }
+
+            }
+
+            if (exclamationMark != null)
+            {
+                exclamationMark.gameObject.SetActive(true);
+                StartCoroutine(HideExclamation());
+            }
+
+        }
+    }
+    private IEnumerator HideExclamation()
+    {
+        yield return new WaitForSeconds(2f); // show for 2 seconds
+        exclamationMark.gameObject.SetActive(false);
+    }
+
+    // Conversation coroutine
+    private IEnumerator ConversationSequence()
+    {
+        isInteracting = true;
+        hasBeenConfronted = true;
+
+        if (conversationManager != null)
+        {
+            conversationManager.ShowConversation(
+                "Player: Throwing trash harms our world.\n" +
+                "Polluter: I didn’t realize… I’ll stop now."
+            );
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        if (conversationManager != null)
+            conversationManager.HideConversation();
+
+        // Stop polluting permanently
+        isPolluter = false;
+        if (polluteRoutine != null) StopCoroutine(polluteRoutine);
+
+        // Resume walking
+        isInteracting = false;
+
+        // 🔔 Broadcast event
+        GameEvents.OnPolluterStopped?.Invoke();
+    }
+
     public void Interact(Transform playerTransform)
     {
         isInteracting = true;
         player = playerTransform;
+
+        if (isPolluter && !hasBeenConfronted)
+        {
+            StartCoroutine(ConversationSequence());
+        }
+        else
+        {
+            isInteracting = false;
+        }
     }
 }
