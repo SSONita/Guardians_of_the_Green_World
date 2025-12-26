@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4caa76313ed1a4a44a0038f54dcdd27f, type: 3}
   m_Name: LightingConfig_Default
   m_EditorClassIdentifier: 
-  safeSkybox: {fileID: 0}
-  dangerSkybox: {fileID: 0}
-  disasterSkybox: {fileID: 0}
-  safeLightColor: {r: 1, g: 0.95, b: 0.85, a: 1}
+  safeSkybox: {fileID: 2100000, guid: 0c79e6474e59d470599f43a3fe69e7a0, type: 2}
+  dangerSkybox: {fileID: 2100000, guid: be5b104c20d9f408297d7a8d4bcb8cea, type: 2}
+  disasterSkybox: {fileID: 2100000, guid: c3483cbb2bddf4461bab143fcfeed883, type: 2}
+  safeLightColor: {r: 0.9811321, g: 0.9287628, b: 0.7821289, a: 1}
   safeLightIntensity: 1.2
-  dangerLightColor: {r: 0.98490566, g: 0.8645338, b: 0.5630687, a: 1}
-  dangerLightIntensity: 0.8
-  disasterLightColor: {r: 0.96981126, g: 0.7988848, b: 0.22506933, a: 1}
-  disasterLightIntensity: 0.4
+  dangerLightColor: {r: 0.7075472, g: 0.23040248, b: 0.130162, a: 1}
+  dangerLightIntensity: 1.2
+  disasterLightColor: {r: 0.9716981, g: 0.12022825, b: 0.022917405, a: 1}
+  disasterLightIntensity: 1.2
   safeAmbient: {r: 0.6, g: 0.7, b: 0.6, a: 1}
   dangerAmbient: {r: 0.4, g: 0.45, b: 0.5, a: 1}
   disasterAmbient: {r: 0.25, g: 0.3, b: 0.35, a: 1}
   enableFog: 1
-  safeFogColor: {r: 0.75, g: 0.85, b: 0.8, a: 1}
+  safeFogColor: {r: 1, g: 1, b: 1, a: 1}
   safeFogDensity: 0.002
-  dangerFogColor: {r: 0.5, g: 0.55, b: 0.6, a: 1}
-  dangerFogDensity: 0.01
-  disasterFogColor: {r: 0.2, g: 0.22, b: 0.25, a: 1}
-  disasterFogDensity: 0.03
+  dangerFogColor: {r: 0.7075472, g: 0.69753474, b: 0.69753474, a: 1}
+  dangerFogDensity: 0.003
+  disasterFogColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+  disasterFogDensity: 0.01

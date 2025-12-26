@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1584118338159827637}
   - component: {fileID: 1177957121298281685}
   - component: {fileID: -2733840774687750096}
+  - component: {fileID: 5675114117514025578}
   m_Layer: 0
   m_Name: Pint Glass
   m_TagString: Trash
@@ -108,7 +109,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -133,3 +134,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.19044301, y: 0.19044295, z: 0.46835345}
   m_Center: {x: -0.0000000037252903, y: -0.00015777722, z: -0.00012049824}
+--- !u!114 &5675114117514025578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8412863031436712038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9986a66916804b4791ac687d39729dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: 3
+  isDraggable: 1
+  dragSmooth: 15
+  dragDepth: 0

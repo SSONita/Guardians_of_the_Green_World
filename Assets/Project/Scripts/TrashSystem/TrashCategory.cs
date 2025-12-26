@@ -7,6 +7,7 @@ public enum TrashCategory
     Plastic,
     Metal,
     Paper,
+    Glass,
     Organic,        // optional
     GeneralWaste    // optional (non-recyclable)
 }

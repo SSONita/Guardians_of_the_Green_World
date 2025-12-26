@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7054992840978113147}
   - component: {fileID: -8630109582890739581}
   - component: {fileID: 1139878934128806084}
+  - component: {fileID: 1140833845070094478}
   m_Layer: 0
   m_Name: Beer Can Blue Crushed
   m_TagString: Trash
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 937326242163579350}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -57.982555, y: -12.20854, z: -9.1532755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -110,7 +111,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -188,6 +189,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1140833845070094478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937326242163579350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9986a66916804b4791ac687d39729dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: 0
+  isDraggable: 1
+  dragSmooth: 15
+  dragDepth: 0
 --- !u!1 &4581694020254849032
 GameObject:
   m_ObjectHideFlags: 0

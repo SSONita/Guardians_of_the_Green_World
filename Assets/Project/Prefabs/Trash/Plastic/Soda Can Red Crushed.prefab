@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 720171314480848431}
   - component: {fileID: 421193627359730789}
   - component: {fileID: -6445860409259321406}
+  - component: {fileID: 3700274100263346675}
   m_Layer: 0
   m_Name: Soda Can Red Crushed
   m_TagString: Trash
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3230034147011233538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -57.690384, y: -12.227263, z: -10.67793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -110,7 +111,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -135,6 +136,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18573658, y: 0.24873498, z: 0.2506091}
   m_Center: {x: 0, y: 0.049830053, z: -0.07703738}
+--- !u!114 &3700274100263346675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230034147011233538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9986a66916804b4791ac687d39729dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: 0
+  isDraggable: 1
+  dragSmooth: 15
+  dragDepth: 0
 --- !u!1 &7351139419438461794
 GameObject:
   m_ObjectHideFlags: 0
