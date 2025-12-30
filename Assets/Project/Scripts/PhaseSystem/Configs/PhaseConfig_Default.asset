@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871c0f2803731034784917880efbd007, type: 3}
   m_Name: PhaseConfig_Default
   m_EditorClassIdentifier: 
-  safeDuration: 20
-  dangerDuration: 20
-  disasterDuration: 20
+  safeDuration: 60
+  dangerDuration: 60
+  disasterDuration: 60
   musicSafe: {fileID: 8300000, guid: 45d281aa2017d0d45a8e934ebd498c8c, type: 3}
   musicDanger: {fileID: 8300000, guid: 23db2e5b9145a2b41be887c9f4b6cded, type: 3}
   musicDisaster: {fileID: 8300000, guid: 956613cbf272d8c46957bb1e9488f0c3, type: 3}

@@ -20162,6 +20162,10 @@ MonoBehaviour:
   interactKey: 101
   faceTurnSpeed: 5
   resumeBuffer: 0.5
+  isPolluter: 0
+  trashPrefabs: []
+  exclamationMark: {fileID: 0}
+  trashInterval: 15
 --- !u!1001 &855966504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24130,6 +24134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 991776093}
   - component: {fileID: 991776092}
+  - component: {fileID: 991776094}
   m_Layer: 0
   m_Name: CutsceneDirector
   m_TagString: Untagged
@@ -24199,6 +24204,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &991776094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991776091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd0d5436125f48fa9eadcd07d747c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 991776092}
+  gameplaySceneName: Gameplay
 --- !u!1001 &991949191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51951,6 +51970,10 @@ MonoBehaviour:
   interactKey: 101
   faceTurnSpeed: 5
   resumeBuffer: 0.5
+  isPolluter: 0
+  trashPrefabs: []
+  exclamationMark: {fileID: 0}
+  trashInterval: 15
 --- !u!1001 &1969849641
 PrefabInstance:
   m_ObjectHideFlags: 0

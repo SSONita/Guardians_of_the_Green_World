@@ -34,7 +34,6 @@ public class GameHUD : MonoBehaviour
         timeRemaining = gameDuration;
         UpdateTrashCounter();
         UpdateTimer();
-        // Phase will be set by PhaseController via event
     }
 
     void Update()
@@ -45,6 +44,8 @@ public class GameHUD : MonoBehaviour
         {
             timeRemaining -= Time.deltaTime;
             UpdateTimer();
+
+            // Keep checking if both conditions are satisfied
             CheckWinCondition();
         }
         else
@@ -67,6 +68,8 @@ public class GameHUD : MonoBehaviour
         collectedTrash++;
         Debug.Log($"[HUD] Trash collected. {collectedTrash}/{totalTrash}");
         UpdateTrashCounter();
+
+        // Re-check conditions after collecting
         CheckWinCondition();
     }
 
@@ -78,8 +81,20 @@ public class GameHUD : MonoBehaviour
             totalTrash--;
             Debug.Log($"[HUD] Trash removed. Total = {totalTrash}, Collected = {collectedTrash}");
             UpdateTrashCounter();
+
+            // Re-check conditions after removal
             CheckWinCondition();
         }
+    }
+
+    // Called when polluter is confronted
+    public void ConfrontPolluter()
+    {
+        polluterConfronted = true;
+        Debug.Log("[HUD] Polluter confronted.");
+
+        // Re-check conditions after confrontation
+        CheckWinCondition();
     }
 
     void UpdateTrashCounter()
@@ -127,7 +142,10 @@ public class GameHUD : MonoBehaviour
     {
         if (gameEnded) return;
 
-        if (collectedTrash >= totalTrash && polluterConfronted)
+        Debug.Log($"[HUD] Checking win: collected={collectedTrash}, total={totalTrash}, confronted={polluterConfronted}");
+
+        // ✅ Only win if BOTH conditions are true
+        if (polluterConfronted && collectedTrash >= totalTrash)
         {
             WinGame();
         }
@@ -136,14 +154,14 @@ public class GameHUD : MonoBehaviour
     void WinGame()
     {
         gameEnded = true;
-        Debug.Log("[HUD] Win! All trash collected and polluter confronted.");
-        SceneManager.LoadScene("SortingScene");
+        Debug.Log("[HUD] Win! All trash collected AND polluter confronted.");
+        SceneManager.LoadScene("Sorting3D"); // Replace with your SortScene name
     }
 
     void LoseGame()
     {
         gameEnded = true;
         Debug.Log("[HUD] Lose! Timer ran out.");
-        SceneManager.LoadScene("ResultScene");
+        SceneManager.LoadScene("ResultScene"); // Replace with your ResultScene name
     }
 }

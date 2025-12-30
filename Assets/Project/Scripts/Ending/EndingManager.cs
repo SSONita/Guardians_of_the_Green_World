@@ -31,7 +31,7 @@ public class EndingManager : MonoBehaviour
 
     public void RestartGame()
     {
-        //SceneManager.LoadScene("MainGameplayScene"); // replace with your gameplay scene name
+        SceneManager.LoadScene("Gameplay"); // replace with your gameplay scene name
     }
 
     public void ExitGame()

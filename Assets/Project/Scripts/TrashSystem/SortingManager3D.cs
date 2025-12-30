@@ -106,7 +106,7 @@ public class SortingManager3D : MonoBehaviour
             PlayerPrefs.SetFloat("Accuracy", accuracy);
 
             // Load ending scene
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Ending_Success");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("ResultScene");
         }
 
     }
