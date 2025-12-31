@@ -155,13 +155,32 @@ public class GameHUD : MonoBehaviour
     {
         gameEnded = true;
         Debug.Log("[HUD] Win! All trash collected AND polluter confronted.");
-        SceneManager.LoadScene("Sorting3D"); // Replace with your SortScene name
+
+        // Save win state
+        PlayerPrefs.SetInt("Win", 1);
+        PlayerPrefs.SetInt("CorrectlySorted", collectedTrash);
+        PlayerPrefs.SetInt("IncorrectlySorted", 0); // or whatever mistakes you tracked
+        PlayerPrefs.SetInt("TotalItems", totalTrash);
+        PlayerPrefs.Save();
+
+        // Load Sorting scene
+        SceneManager.LoadScene("Sorting3D");
     }
 
     void LoseGame()
     {
         gameEnded = true;
         Debug.Log("[HUD] Lose! Timer ran out.");
-        SceneManager.LoadScene("ResultScene"); // Replace with your ResultScene name
+
+        // Save lose state
+        PlayerPrefs.SetInt("Win", 0);
+        PlayerPrefs.SetInt("CorrectlySorted", 0);   // force accuracy to 0%
+        PlayerPrefs.SetInt("IncorrectlySorted", 0); // all trash considered missed
+        PlayerPrefs.SetInt("TotalItems", 0);
+        PlayerPrefs.Save();
+
+        // Load Result scene
+        SceneManager.LoadScene("ResultScene");
     }
+
 }

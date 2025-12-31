@@ -164,7 +164,6 @@ public class NPCMovement : MonoBehaviour
         exclamationMark.gameObject.SetActive(false);
     }
 
-    // Conversation coroutine
     private IEnumerator ConversationSequence()
     {
         isInteracting = true;
@@ -187,12 +186,19 @@ public class NPCMovement : MonoBehaviour
         isPolluter = false;
         if (polluteRoutine != null) StopCoroutine(polluteRoutine);
 
+        // ✅ Tell HUD the polluter was confronted
+        if (GameHUD.Instance != null)
+        {
+            GameHUD.Instance.ConfrontPolluter();
+        }
+
         // Resume walking
         isInteracting = false;
 
-        // 🔔 Broadcast event
+        // Broadcast event (optional if you want other systems to listen)
         GameEvents.OnPolluterStopped?.Invoke();
     }
+
 
     public void Interact(Transform playerTransform)
     {

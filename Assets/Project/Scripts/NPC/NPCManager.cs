@@ -16,6 +16,12 @@ public class NPCManager : MonoBehaviour
             return;
         }
 
+        for (int i = 0; i < allNPCs.Length; i++)
+        {
+            allNPCs[i].isPolluter = false;
+            allNPCs[i].trashPrefabs = null;
+        }
+
         // Pick one random NPC
         int chosenIndex = Random.Range(0, allNPCs.Length);
 
